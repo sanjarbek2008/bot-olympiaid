@@ -308,6 +308,7 @@ async def process_delete_olympiad(message: Message, state: FSMContext):
     await state.set_state(AdminStates.admin_menu)
 
 
+@router.callback_query(F.data == "admin_broadcast")
 async def start_broadcast(callback: CallbackQuery, state: FSMContext):
     """Start broadcast message process"""
     if not await SQLiteManager.is_admin(callback.from_user.id):
