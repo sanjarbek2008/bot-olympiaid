@@ -47,6 +47,7 @@ share/python-wheels/
 *.bak
 *.swp
 *.asv
+*.db
 .DS_Store
 
 # OS generated files #
