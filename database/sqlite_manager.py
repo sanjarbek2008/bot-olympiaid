@@ -241,3 +241,25 @@ class SQLiteManager:
             )
             await db.commit()
             return True
+
+    @staticmethod
+    async def set_user_language(telegram_id: int, language: str) -> bool:
+        """Set user's language preference"""
+        async with aiosqlite.connect(settings.sqlite_db_path) as db:
+            await db.execute(
+                "UPDATE telegram_users SET language = ? WHERE telegram_id = ?",
+                (language, telegram_id)
+            )
+            await db.commit()
+            return True
+
+    @staticmethod
+    async def get_user_language(telegram_id: int) -> str:
+        """Get user's language preference, default to 'en'"""
+        async with aiosqlite.connect(settings.sqlite_db_path) as db:
+            cursor = await db.execute(
+                "SELECT language FROM telegram_users WHERE telegram_id = ?",
+                (telegram_id,)
+            )
+            result = await cursor.fetchone()
+            return result[0] if result else 'en'

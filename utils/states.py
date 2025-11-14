@@ -2,6 +2,7 @@ from aiogram.fsm.state import State, StatesGroup
 
 
 class UserStates(StatesGroup):
+    selecting_language = State()
     waiting_for_channel_join = State()
     main_menu = State()
     viewing_olympiads = State()

@@ -5,6 +5,7 @@ from database.sqlite_manager import SQLiteManager
 from keyboards.inline import main_menu_keyboard
 from utils.helpers import check_user_in_channel
 from utils.states import UserStates
+from utils.language_manager import LanguageManager
 from config.settings import settings
 import logging
 
@@ -16,6 +17,7 @@ router = Router()
 async def check_channel_membership(callback: CallbackQuery, state: FSMContext):
     """Check if user has joined the channel"""
     user_id = callback.from_user.id
+    user_language = await SQLiteManager.get_user_language(user_id)
 
     if await check_user_in_channel(callback.bot, user_id):
         # User has joined the channel
@@ -29,16 +31,17 @@ async def check_channel_membership(callback: CallbackQuery, state: FSMContext):
             logger.info(f"Gave {settings.referral_points} points to user {user['referred_by']} for referring {user_id}")
 
         is_admin = await SQLiteManager.is_admin(user_id)
+        success_text = LanguageManager.get_text('welcome_back', user_language, first_name='')
         await callback.message.edit_text(
-            "🎉 Great! You've successfully joined our channel.\n\n"
-            "Now you can access all bot features. What would you like to do?",
-            reply_markup=main_menu_keyboard(is_admin)
+            "🎉 " + success_text,
+            reply_markup=main_menu_keyboard(is_admin, language=user_language)
         )
         await state.set_state(UserStates.main_menu)
-        await callback.answer("Welcome! Channel membership verified ✅")
+        await callback.answer("✅ " + LanguageManager.get_text('language_selected', user_language))
 
     else:
+        error_text = LanguageManager.get_text('errors.invalid_input', user_language)
         await callback.answer(
-            "❌ You haven't joined our channel yet. Please join first!",
+            "❌ " + error_text,
             show_alert=True
         )

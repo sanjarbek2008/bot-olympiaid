@@ -1,11 +1,12 @@
 from aiogram import Router, F
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from database.sqlite_manager import SQLiteManager
-from keyboards.inline import channel_join_keyboard, main_menu_keyboard
+from keyboards.inline import channel_join_keyboard, main_menu_keyboard, language_selection_keyboard
 from utils.helpers import extract_referrer_id, check_user_in_channel
 from utils.states import UserStates
+from utils.language_manager import LanguageManager
 from config.settings import settings
 import logging
 
@@ -42,14 +43,13 @@ async def start_handler(message: Message, state: FSMContext):
         if success and referrer_id:
             logger.info(f"New user {user_id} referred by {referrer_id}")
 
-        welcome_text = f"👋 Welcome {first_name}!\n\n"
-        welcome_text += "To start using our Olympiad Registration Bot, please join our official channel first."
-
+        # Show language selection for new users
+        language_text = LanguageManager.get_text('language_selection', 'en')
         await message.answer(
-            welcome_text,
-            reply_markup=channel_join_keyboard(settings.channel_invite_link)
+            language_text,
+            reply_markup=language_selection_keyboard()
         )
-        await state.set_state(UserStates.waiting_for_channel_join)
+        await state.set_state(UserStates.selecting_language)
 
 
     else:
@@ -78,6 +78,7 @@ async def start_handler(message: Message, state: FSMContext):
                     logger.info(f"Immediate points given to {referrer_id} for re-referring {user_id}")
 
         # Existing user - check channel membership
+        user_language = await SQLiteManager.get_user_language(user_id)
 
         if await check_user_in_channel(message.bot, user_id):
 
@@ -86,24 +87,74 @@ async def start_handler(message: Message, state: FSMContext):
 
             is_admin = await SQLiteManager.is_admin(user_id)
 
+            welcome_text = LanguageManager.get_text('welcome_back', user_language, first_name=first_name)
             await message.answer(
-
-                f"Welcome back, {first_name}! 🎉\n\nWhat would you like to do?",
-
-                reply_markup=main_menu_keyboard(is_admin)
-
+                welcome_text,
+                reply_markup=main_menu_keyboard(is_admin, language=user_language)
             )
 
             await state.set_state(UserStates.main_menu)
 
         else:
 
+            join_text = LanguageManager.get_text('join_channel', user_language)
             await message.answer(
-
-                "Please join our channel to continue using the bot:",
-
-                reply_markup=channel_join_keyboard(settings.channel_invite_link)
-
+                join_text,
+                reply_markup=channel_join_keyboard(settings.channel_invite_link, language=user_language)
             )
 
             await state.set_state(UserStates.waiting_for_channel_join)
+
+
+@router.callback_query(F.data.startswith('lang_'))
+async def language_selection_handler(query: CallbackQuery, state: FSMContext):
+    """Handle language selection"""
+    user_id = query.from_user.id
+    first_name = query.from_user.first_name
+    
+    # Extract language code from callback data
+    language = query.data.split('_')[1]  # lang_en -> en
+    
+    # Save language preference
+    await SQLiteManager.set_user_language(user_id, language)
+    
+    # Confirm language selection
+    confirmation_text = LanguageManager.get_text('language_selected', language)
+    await query.message.edit_text(confirmation_text)
+    
+    # Check if this is a new user or existing user changing language
+    user = await SQLiteManager.get_user(user_id)
+    if user and user['joined_channel']:
+        # Existing user - show main menu
+        is_admin = await SQLiteManager.is_admin(user_id)
+        welcome_text = LanguageManager.get_text('welcome_back', language, first_name=first_name)
+        await query.message.answer(
+            welcome_text,
+            reply_markup=main_menu_keyboard(is_admin, language=language)
+        )
+        await state.set_state(UserStates.main_menu)
+    else:
+        # New user - show channel join
+        welcome_text = LanguageManager.get_text('welcome', language, first_name=first_name)
+        await query.message.answer(
+            welcome_text,
+            reply_markup=channel_join_keyboard(settings.channel_invite_link, language=language)
+        )
+        await state.set_state(UserStates.waiting_for_channel_join)
+    
+    await query.answer()
+
+
+@router.callback_query(F.data == 'change_language')
+async def change_language_handler(query: CallbackQuery, state: FSMContext):
+    """Handle language change from main menu"""
+    user_id = query.from_user.id
+    user_language = await SQLiteManager.get_user_language(user_id)
+    
+    language_text = LanguageManager.get_text('language_selection', user_language)
+    await query.message.edit_text(
+        language_text,
+        reply_markup=language_selection_keyboard()
+    )
+    await state.set_state(UserStates.selecting_language)
+    await query.answer()

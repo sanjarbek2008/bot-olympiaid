@@ -1,0 +1,89 @@
+{
+  "welcome": "👋 Welcome {first_name}!\n\nTo start using our Olympiad Registration Bot, please join our official channel first.",
+  "welcome_back": "Welcome back, {first_name}! 🎉\n\nWhat would you like to do?",
+  "join_channel": "Please join our channel to continue using the bot:",
+  "language_selection": "🌍 Please select your language / Пожалуйста выберите язык / Iltimos tilni tanlang:",
+  "language_selected": "✅ Language set to English",
+  
+  "buttons": {
+    "join_channel": "📢 Join Channel",
+    "i_joined": "✅ I Joined",
+    "view_olympiads": "🏆 View Olympiads",
+    "invite_friends": "👥 Invite Friends",
+    "my_stats": "📊 My Stats",
+    "admin_panel": "👑 Admin Panel",
+    "broadcast": "📢 Broadcast Message",
+    "create_olympiad": "🏆 Create Olympiad",
+    "delete_olympiad": "🗑️ Delete Olympiad",
+    "set_price": "💰 Set Olympiad Price",
+    "set_limit": "🔢 Set Registration Limit",
+    "back_to_menu": "🔙 Back to Menu",
+    "invite_friend": "👥 Invite Friend",
+    "register": "📝 Register",
+    "register_free": "📝 Register (Free)",
+    "register_points": "📝 Register ({price} points)",
+    "not_enough_points": "❌ Not enough points ({price} needed)",
+    "back_to_list": "🔙 Back to List",
+    "male": "👨 Male",
+    "female": "👩 Female",
+    "yes": "✅ Yes",
+    "no": "❌ No",
+    "confirm_registration": "✅ Confirm Registration",
+    "cancel": "❌ Cancel",
+    "edit": "✏️ Edit Information",
+    "change_language": "🌍 Change Language"
+  },
+
+  "olympiads": {
+    "title": "🏆 Olympiads",
+    "no_olympiads": "No olympiads available at the moment.",
+    "details": "📋 Olympiad Details",
+    "subject": "Subject",
+    "date": "Date",
+    "price": "Price",
+    "free": "Free",
+    "registration_limit": "Registration Limit",
+    "unlimited": "Unlimited"
+  },
+
+  "registration": {
+    "title": "📝 Registration",
+    "enter_full_name": "Please enter your full name:",
+    "enter_email": "Please enter your email:",
+    "enter_phone": "Please enter your phone number:",
+    "select_gender": "Please select your gender:",
+    "participate_school": "Do you participate in school olympiads?",
+    "participate_university": "Do you participate in university olympiads?",
+    "confirmation": "Please confirm your information:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nGender: {gender}\nSchool Olympiads: {school}\nUniversity Olympiads: {university}",
+    "success": "✅ Registration successful!",
+    "error": "❌ An error occurred during registration. Please try again."
+  },
+
+  "referral": {
+    "title": "👥 Invite Friends",
+    "your_link": "Your referral link:",
+    "copy_link": "Copy this link and share it with your friends!",
+    "stats": "📊 Your Stats",
+    "referrals_count": "Total Referrals: {count}",
+    "points": "Your Points: {points}",
+    "referral_points": "Points per Referral: {points}"
+  },
+
+  "admin": {
+    "title": "👑 Admin Panel",
+    "broadcast_sent": "✅ Message broadcasted to {count} users",
+    "olympiad_created": "✅ Olympiad created successfully",
+    "olympiad_deleted": "✅ Olympiad deleted successfully",
+    "price_updated": "✅ Price updated successfully",
+    "limit_updated": "✅ Registration limit updated successfully"
+  },
+
+  "errors": {
+    "invalid_input": "❌ Invalid input. Please try again.",
+    "user_not_found": "❌ User not found.",
+    "insufficient_points": "❌ You don't have enough points for this registration.",
+    "already_registered": "❌ You are already registered for this olympiad.",
+    "invalid_phone": "❌ Invalid phone number format.",
+    "invalid_email": "❌ Invalid email format."
+  }
+}

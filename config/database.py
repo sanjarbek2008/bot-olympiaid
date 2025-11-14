@@ -21,6 +21,7 @@ async def init_sqlite_db():
                 referred_by BIGINT,
                 points INTEGER DEFAULT 0,
                 joined_channel BOOLEAN DEFAULT 0,
+                language VARCHAR(10) DEFAULT 'en',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (referred_by) REFERENCES telegram_users(telegram_id)
             )

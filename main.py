@@ -4,6 +4,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from config.settings import settings
 from config.database import init_sqlite_db
+from config.migrations import run_migrations
 from middleware.auth import AuthMiddleware
 
 # Import routers
@@ -22,6 +23,10 @@ async def main():
     # Initialize database
     await init_sqlite_db()
     logger.info("Database initialized")
+    
+    # Run migrations
+    await run_migrations()
+    logger.info("Migrations completed")
 
     # Initialize bot and dispatcher
     bot = Bot(token=settings.bot_token)

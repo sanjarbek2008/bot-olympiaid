@@ -1,0 +1,89 @@
+{
+  "welcome": "👋 Xush kelibsiz, {first_name}!\n\nOlimpiyada ro'yxatiga qo'shilish botidan foydalanishni boshlash uchun, iltimos, avval rasmiy kanalimizga qo'shiling.",
+  "welcome_back": "Xush kelibsiz, {first_name}! 🎉\n\nSiz nima qilmoqchi?",
+  "join_channel": "Botdan foydalanishni davom ettirish uchun iltimos kanalimizga qo'shiling:",
+  "language_selection": "🌍 Please select your language / Пожалуйста выберите язык / Iltimos tilni tanlang:",
+  "language_selected": "✅ Til O'zbekchaga o'rnatildi",
+  
+  "buttons": {
+    "join_channel": "📢 Kanalga qo'shilish",
+    "i_joined": "✅ Qo'shildim",
+    "view_olympiads": "🏆 Olimpiadalarni ko'rish",
+    "invite_friends": "👥 Do'stlarni taklif qilish",
+    "my_stats": "📊 Mening statistikam",
+    "admin_panel": "👑 Admin paneli",
+    "broadcast": "📢 Xabar yuborish",
+    "create_olympiad": "🏆 Olimpiyada yaratish",
+    "delete_olympiad": "🗑️ Olimpiyada o'chirish",
+    "set_price": "💰 Narxni o'rnatish",
+    "set_limit": "🔢 Ro'yxatga olish chegarasini o'rnatish",
+    "back_to_menu": "🔙 Menyuga qaytish",
+    "invite_friend": "👥 Do'stni taklif qilish",
+    "register": "📝 Ro'yxatga olish",
+    "register_free": "📝 Ro'yxatga olish (Bepul)",
+    "register_points": "📝 Ro'yxatga olish ({price} ball)",
+    "not_enough_points": "❌ Yetarli ball yo'q ({price} kerak)",
+    "back_to_list": "🔙 Ro'yxatga qaytish",
+    "male": "👨 Erkak",
+    "female": "👩 Ayol",
+    "yes": "✅ Ha",
+    "no": "❌ Yo'q",
+    "confirm_registration": "✅ Ro'yxatga olishni tasdiqlash",
+    "cancel": "❌ Bekor qilish",
+    "edit": "✏️ Ma'lumotni tahrirlash",
+    "change_language": "🌍 Tilni o'zgartirish"
+  },
+
+  "olympiads": {
+    "title": "🏆 Olimpiadalar",
+    "no_olympiads": "Hozirda olimpiadalar mavjud emas.",
+    "details": "📋 Olimpiyada tafsilotlari",
+    "subject": "Fan",
+    "date": "Sana",
+    "price": "Narx",
+    "free": "Bepul",
+    "registration_limit": "Ro'yxatga olish chegarasi",
+    "unlimited": "Cheksiz"
+  },
+
+  "registration": {
+    "title": "📝 Ro'yxatga olish",
+    "enter_full_name": "Iltimos, to'liq ismingizni kiriting:",
+    "enter_email": "Iltimos, elektron pochtangizni kiriting:",
+    "enter_phone": "Iltimos, telefon raqamingizni kiriting:",
+    "select_gender": "Iltimos, jinsingizni tanlang:",
+    "participate_school": "Siz maktab olimpiadalarida ishtirok etasizmi?",
+    "participate_university": "Siz universitet olimpiadalarida ishtirok etasizmi?",
+    "confirmation": "Iltimos, ma'lumotingizni tasdiqlang:\n\nIsm: {name}\nPochta: {email}\nTelefon: {phone}\nJinsi: {gender}\nMaktab olimpiadalar: {school}\nUniversitet olimpiadalar: {university}",
+    "success": "✅ Ro'yxatga olish muvaffaqiyatli!",
+    "error": "❌ Ro'yxatga olishda xato yuz berdi. Iltimos, qayta urinib ko'ring."
+  },
+
+  "referral": {
+    "title": "👥 Do'stlarni taklif qilish",
+    "your_link": "Sizning referal havolangiz:",
+    "copy_link": "Bu havolani nusxalang va do'stlaringiz bilan ulashing!",
+    "stats": "📊 Sizning statistikangiz",
+    "referrals_count": "Jami referallar: {count}",
+    "points": "Sizning balllaringiz: {points}",
+    "referral_points": "Referalga ball: {points}"
+  },
+
+  "admin": {
+    "title": "👑 Admin paneli",
+    "broadcast_sent": "✅ Xabar {count} foydalanuvchiga yuborildi",
+    "olympiad_created": "✅ Olimpiyada muvaffaqiyatli yaratildi",
+    "olympiad_deleted": "✅ Olimpiyada muvaffaqiyatli o'chirildi",
+    "price_updated": "✅ Narx muvaffaqiyatli yangilandi",
+    "limit_updated": "✅ Ro'yxatga olish chegarasi muvaffaqiyatli yangilandi"
+  },
+
+  "errors": {
+    "invalid_input": "❌ Noto'g'ri kiritish. Iltimos, qayta urinib ko'ring.",
+    "user_not_found": "❌ Foydalanuvchi topilmadi.",
+    "insufficient_points": "❌ Bu ro'yxatga olish uchun yetarli balllaringiz yo'q.",
+    "already_registered": "❌ Siz allaqachon bu olimpiadaga ro'yxatga olgan.",
+    "invalid_phone": "❌ Noto'g'ri telefon raqam formati.",
+    "invalid_email": "❌ Noto'g'ri elektron pochta formati."
+  }
+}
